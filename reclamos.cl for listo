@@ -1,0 +1,81 @@
+install.packages('rvest')
+library('rvest')
+
+# Abrir html en R Studio
+# Página inicial
+ReclamosClinicio<- 'https://www.reclamos.cl/transportes'
+# Página 2
+ReclamosCl<- 'https://www.reclamos.cl/transportes?page=1'
+#pagina final
+ReclamosClfinal<- 'https://www.reclamos.cl/transportes?page=477'
+paginastotales<-"https://www.reclamos.cl/transportes?page=i"
+
+# Leer página inicial
+# Leer página 2
+#leer ultima página
+readHtmlReclamosClinicio <- read_html(ReclamosClinicio)
+readHtmlReclamosCl <- read_html(ReclamosCl)
+readHtmlReclamosClFinal <- read_html(ReclamosClfinal)
+readHtmlpaginas <- read_html(paginastotales)
+# busca tablas
+
+contenidoReclamosClTableinicio <- html_nodes(readHtmlReclamosClinicio,'table')
+contenidoReclamosClTable <- html_nodes(readHtmlReclamosCl,'table')
+contenidoReclamosClTablefinal <- html_nodes(readHtmlReclamosClFinal,'table')
+contenidopaginastotales <- html_nodes(readHtmlpaginas,'pager-list')
+#leer contenido tablas
+
+
+
+contenidoReclamosCl <- html_nodes(contenidoReclamosClTable,'a')
+contenidoReclamosClfinal <- html_nodes(contenidoReclamosClTablefinal,'a')
+contenidopaginastotales <- html_nodes(readHtmlpaginas,'pager')
+# obten los links de la tabla
+
+linksReclamosClinicio <- html_attr(contenidoReclamosClinicio,"href")
+linksReclamosCl <- html_attr(contenidoReclamosClA,"href")
+linksReclamosClfinal <- html_attr(contenidoReclamosClfinal,"href")
+linkstotales<-html_attr(contenidopaginastotales)
+# muestrame los titulares del link
+
+leertextoinicio<-html_text(contenidoReclamosClinicio)
+leertexto<-html_text(contenidoReclamosClA)
+leertextofinal<-html_text(contenidoReclamosClfinal)
+
+#intento de sacar info de cada pagina
+
+readHtmltodos <- read_html(listalinks)
+contenidostodos <- html_nodes(readHtmltodos,'table')
+leertodostextos<-html_text(listalinks)
+
+
+print (leertextoinicio)
+print (leertexto)
+print(leertextofinal) 
+#obtener tamaño o numero de paginas totales
+length(contenidoReclamosClA)
+
+# leeme los titulares desde pagina 2 en adelante
+
+
+# Extracción del texto contenido en la clase div
+
+paginastotales<- html_nodes(ReclamosCl,'.div')
+buscarcambiodepag<- html_nodes(contenidoReclamosClTableinicio,'pager-current')
+
+pager-current
+
+
+# For Loop genera links todas las páginas esta bueno
+ for(i in 1 : 477){print(paste("https://www.reclamos.cl/transportes?page=",i,sep=""))
+  }
+
+#lista con todos los links
+paginastotales <- list();
+for(i in 1 : 477){
+  paginastotales <- c(paginastotales,print(paste("https://www.reclamos.cl/transportes?page=",i,sep="")))
+  }
+print (paginastotales)
+listalinks <- unlist(paginastotales)
+textoNoticia <- gsub("'","",listalinks)
+
