@@ -7,7 +7,7 @@ library('xml2')
 # Página inicial
 ReclamosClinicio<- 'https://www.reclamos.cl/transportes'
 # Página 2
-
+pagina0<- 'https://www.reclamos.cl/transportes'
 pagina1<- 'https://www.reclamos.cl/transportes?page=1'
 pagina2<- 'https://www.reclamos.cl/transportes?page=2'
 pagina3<- 'https://www.reclamos.cl/transportes?page=3'
@@ -62,7 +62,7 @@ pagina50<- 'https://www.reclamos.cl/transportes?page=50'
 ########################READ HTML#####################################
 
 
-
+readhtmlpagina0 <- read_html(pagina0)
 readhtmlpagina1 <- read_html(pagina1)
 readhtmlpagina2<- read_html(pagina2)
 readhtmlpagina3	<-  read_html(pagina3)
@@ -115,6 +115,7 @@ readhtmlpagina49	<-  read_html(pagina49)
 readhtmlpagina50	<-  read_html(pagina50)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      # ##########
 #Contenido tablas
+contenidoReclamosClTablePag0	<- html_nodes(readhtmlpagina0	,'table') 
 contenidoReclamosClTablePag1	<- html_nodes(readhtmlpagina1	,'table') 
 contenidoReclamosClTablePag2	<- html_nodes(readhtmlpagina2	,'table') 
 contenidoReclamosClTablePag3	<- html_nodes(readhtmlpagina3	,'table') 
@@ -167,7 +168,7 @@ contenidoReclamosClTablePag49	<- html_nodes(readhtmlpagina49	,'table')
 contenidoReclamosClTablePag50	<- html_nodes(readhtmlpagina50	,'table') 
 
 # Extraer Info de tablas
-
+contenidoReclamospag0	<- html_nodes(contenidoReclamosClTablePag0	,'a')
 contenidoReclamospag1	<- html_nodes(contenidoReclamosClTablePag1	,'a')
 contenidoReclamospag2	<- html_nodes(contenidoReclamosClTablePag2	,'a')
 contenidoReclamospag3	<- html_nodes(contenidoReclamosClTablePag3	,'a')
@@ -221,6 +222,7 @@ contenidoReclamospag50	<- html_nodes(contenidoReclamosClTablePag50	,'a')
 
 
 #leer contenido
+leer0	<-html_text(contenidoReclamospag0)
 leer1	<-html_text(contenidoReclamospag1)
 leer2	<-html_text(contenidoReclamospag2)
 leer3	<-html_text(contenidoReclamospag3)
@@ -245,7 +247,7 @@ leer21	<-html_text(contenidoReclamospag21)
 leer22	<-html_text(contenidoReclamospag22)
 leer23	<-html_text(contenidoReclamospag23)
 leer24	<-html_text(contenidoReclamospag24)
-lee25	  <-html_text(contenidoReclamospag25)
+leer25	<-html_text(contenidoReclamospag25)
 leer26	<-html_text(contenidoReclamospag26)
 leer27	<-html_text(contenidoReclamospag27)
 leer28	<-html_text(contenidoReclamospag28)
@@ -273,14 +275,42 @@ leer49	<-html_text(contenidoReclamospag49)
 leer50	<-html_text(contenidoReclamospag50)
 ###############################FIN LEER TEXTO###########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################   
    
-tablaTextoReclamos1 <- table(unlist(leer1),(leer2),(leer3),(leer4),(leer5),(leer6),(leer7),(leer8),(leer9),(leer10),(leer11),(leer12),(leer13),(leer14),(leer15),(leer16),(leer17),(leer18),(leer19),(leer20),(leer20),(leer21),(leer22),(leer23),(leer24),(leer25),(leer26),(leer27),(leer28),(leer29),(leer30),(leer31),(leer32),(leer33),(leer34),(leer35),(leer36),(leer37),(leer38),(leer39),(leer40),(leer41),(leer42),(leer43),(leer44),(leer45),(leer46),(leer47),(leer48),(leer49),(leer50)
 
 
-dfTextoYFreqReclamos1 <- as.data.frame(tablaTextoReclamos1)
-
-datos <-read.table("c:\\mis_subdirectorios\\fichero",header=T)
-
-list1<-(11:20)
-list2<-(1:10)
+tabla.total <- rbind(leer0,leer1,leer2,leer3,leer4,leer5,leer6,leer7,leer8,leer9,leer10,leer11,leer12,leer13,leer14,leer15,leer16,leer17,leer18,leer19,leer20,leer21,leer22,leer23,leer24,leer25,leer26,leer27,leer28,leer29,leer30,leer31,leer32,leer33,leer34,leer35,leer36,leer37,leer38,leer39,leer40,leer41,leer42,leer43,leer44,leer45,leer46,leer47,leer48,leer49,leer50)
+# [ reached getOption("max.print") -- omitted 40 rows ]
+options(max.print=1000000)
 
 
+#pasando a data frame
+dfTExtocompleto<-data.frame()
+
+
+
+dfTextoYFreqReclamosallpag <- as.data.frame(tabla.total) #tabla lista y dispuesta
+dfTextoYFreqReclamosallpag1 <- gsub("\\:","",dfTextoYFreqReclamosallpag)
+dfTextoYFreqReclamosallpag2 <- gsub("\\-","",dfTextoYFreqReclamosallpag1)
+dfTextoYFreqReclamosallpag3 <- gsub("\\!","",dfTextoYFreqReclamosallpag2)
+dfTextoYFreqReclamosallpag4 <- gsub("\\,","",dfTextoYFreqReclamosallpag3)
+
+
+
+
+
+#o tambien CSV
+write.csv(dfTextoYFreqReclamosallpag)
+
+
+
+
+#crear lista
+unlista<-unlist(dfTextoYFreqReclamosallpag) 
+#crear tabla de la lista
+tablaTextocompleto <- table(unlista)
+
+#lista frecuencias titulos Reclamos.cl
+completos<-as.data.frame(tablaTextocompleto)
+
+
+###############################INTENTO LEER PALABRAS de cada elemento (TITULO)################################################################
+leertabla<- read.table(tablaTextocompleto)
