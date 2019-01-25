@@ -4,9 +4,9 @@ install.packages('xml2')
 library('xml2')
 
 # Abrir html en R Studio
-# Página inicial
+# PÃ¡gina inicial
 ReclamosClinicio<- 'https://www.reclamos.cl/transportes'
-# Página 2
+# PÃ¡gina 2
 pagina0<- 'https://www.reclamos.cl/transportes'
 pagina1<- 'https://www.reclamos.cl/transportes?page=1'
 pagina2<- 'https://www.reclamos.cl/transportes?page=2'
