@@ -312,5 +312,18 @@ tablaTextocompleto <- table(unlista)
 completos<-as.data.frame(tablaTextocompleto)
 
 
-###############################INTENTO LEER PALABRAS de cada elemento (TITULO)################################################################
-leertabla<- read.table(tablaTextocompleto)
+###############################FOR QUE RESUME TODO LO HECHO ANTERIORMENTE, CAPAZ DE RECORRER EL NUMERO DE PÁGINAS QUE SE DESEE################################################################
+dfReclamos<-data.frame()
+for (i in 1:50) {
+  ReclamosInicio<- paste('https://www.reclamos.cl/transportes?page=',i,sep = )
+  print(ReclamosInicio)
+  readhtmlpagina<-read_html(ReclamosInicio)
+  contenidoReclamosClTablePag<- html_nodes(readhtmlpagina    ,'table')
+  contenidoReclamospag<- html_nodes(contenidoReclamosClTablePag    ,'a')
+  leer<-html_text(contenidoReclamospag)
+  
+  NuevoDfReclamos<-data.frame(Titulo=leer)
+  dfReclamos<-rbind(dfReclamos,NuevoDfReclamos)
+  
+  
+}
