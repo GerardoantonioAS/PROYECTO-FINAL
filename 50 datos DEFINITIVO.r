@@ -3,7 +3,7 @@ library('rvest')
 install.packages('xml2')
 library('xml2')
 
-# Abrir html en R Studio
+# Abrir html en R Studio, testeo 50 primeras páginas (se realizó en paralelo a la creación del for, si no lo lograba tenía este respaldo)
 # Página inicial
 ReclamosClinicio<- 'https://www.reclamos.cl/transportes'
 # Página 2
@@ -59,7 +59,7 @@ pagina48<- 'https://www.reclamos.cl/transportes?page=48'
 pagina49<- 'https://www.reclamos.cl/transportes?page=49'
 pagina50<- 'https://www.reclamos.cl/transportes?page=50'
 
-########################READ HTML#####################################
+########################READ HTML de cada página#####################################
 
 
 readhtmlpagina0 <- read_html(pagina0)
@@ -114,7 +114,7 @@ readhtmlpagina48	<-  read_html(pagina48)
 readhtmlpagina49	<-  read_html(pagina49)
 readhtmlpagina50	<-  read_html(pagina50)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      # ##########
-#Contenido tablas
+#Extraer Contenido tablas
 contenidoReclamosClTablePag0	<- html_nodes(readhtmlpagina0	,'table') 
 contenidoReclamosClTablePag1	<- html_nodes(readhtmlpagina1	,'table') 
 contenidoReclamosClTablePag2	<- html_nodes(readhtmlpagina2	,'table') 
@@ -275,10 +275,10 @@ leer49	<-html_text(contenidoReclamospag49)
 leer50	<-html_text(contenidoReclamospag50)
 ###############################FIN LEER TEXTO###########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################   
    
-
+#Se pegan los resultados en una tabla, la cual es una matriz de 50x100 con todos los elementos y variables
 
 tabla.total <- rbind(leer0,leer1,leer2,leer3,leer4,leer5,leer6,leer7,leer8,leer9,leer10,leer11,leer12,leer13,leer14,leer15,leer16,leer17,leer18,leer19,leer20,leer21,leer22,leer23,leer24,leer25,leer26,leer27,leer28,leer29,leer30,leer31,leer32,leer33,leer34,leer35,leer36,leer37,leer38,leer39,leer40,leer41,leer42,leer43,leer44,leer45,leer46,leer47,leer48,leer49,leer50)
-# [ reached getOption("max.print") -- omitted 40 rows ]
+# [ reached getOption("max.print") -- omitted 40 rows ] se soluciona con:
 options(max.print=1000000)
 
 
@@ -327,3 +327,4 @@ for (i in 1:50) {
   
   
 }
+#el testeo arroja los mismos valores que pestaña por pestaña, una vez logrado esto, en el recuadro de buscar, se digitan palabras "bus" y "correos"
